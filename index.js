@@ -8,7 +8,7 @@ const { Server } = require("socket.io");
 const app = express();
 const server = createServer(app);
 const io = new Server(server, {
-    cors: 'localhost:3000'
+    cors: 'https://epic-brattain-e4eeaf.netlify.app/'
 });
 
 
