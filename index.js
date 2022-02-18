@@ -1,11 +1,22 @@
 
+// const http = require('http')
+const { createServer } = require("http");
+const express = require('express');
+const { Server } = require("socket.io");
 
-const io = require('socket.io')(4000, {
-    cors : ['http://localhost:3000']
+
+const app = express();
+const server = createServer(app);
+const io = new Server(server, {
+    cors: 'localhost:3000'
+});
+
+
+app.get('/', (req, res) =>{
+    res.send("app is running")
 })
 
 io.on('connection', (socket) => {
-
 
     socket.on('send', (msg, room) =>{
 
@@ -21,3 +32,6 @@ io.on('connection', (socket) => {
         cb(`You joined ${room}`)
     })
 }); 
+
+
+server.listen(process.env.PORT || 5000, () => console.log(`Server has started.`));
